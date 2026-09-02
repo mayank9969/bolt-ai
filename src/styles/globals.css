@@ -130,6 +130,19 @@
     text-wrap: balance;
   }
 
+  /* Hide the native cursor when the premium custom cursor is active (desktop only). */
+  .cursor-none,
+  .cursor-none * {
+    cursor: none !important;
+  }
+
+  @media (pointer: coarse), (hover: none) {
+    .cursor-none,
+    .cursor-none * {
+      cursor: auto !important;
+    }
+  }
+
   .perspective-1000 {
     perspective: 1000px;
   }

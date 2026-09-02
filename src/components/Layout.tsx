@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import type { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import Credits from './Credits'
+import CustomCursor from './CustomCursor'
 
 interface LayoutProps {
   children: ReactNode
@@ -12,6 +13,7 @@ interface LayoutProps {
 export default function Layout({ children, showNav = true, showCredits = true }: LayoutProps) {
   return (
     <div className="min-h-screen flex flex-col relative">
+      <CustomCursor />
       {/* Background layers */}
       <div className="fixed inset-0 -z-10 grid-bg radial-fade" />
       <div className="fixed inset-0 -z-10 bg-gradient-to-b from-ink-950 via-ink-950 to-ink-900" />
