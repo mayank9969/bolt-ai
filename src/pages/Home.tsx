@@ -6,6 +6,8 @@ import { useMagnetic } from '@/hooks/useMagnetic'
 
 const Scene3D = lazy(() => import('@/components/Scene3D'))
 
+const MotionLink = motion.create(Link)
+
 export default function Home() {
   return (
     <div className="relative">
@@ -184,20 +186,19 @@ function MagneticLink({
   className?: string
   strength?: number
 }) {
-  const magnetic = useMagnetic<HTMLDivElement>({ strength })
+  const magnetic = useMagnetic<HTMLAnchorElement>({ strength })
   return (
-    <motion.div
+    <MotionLink
+      to={to}
       ref={magnetic.ref}
       style={magnetic.style}
       onMouseMove={magnetic.onMouseMove}
       onMouseEnter={magnetic.onMouseEnter}
       onMouseLeave={magnetic.onMouseLeave}
-      className="inline-block"
+      className={className}
     >
-      <Link to={to} className={className}>
-        {children}
-      </Link>
-    </motion.div>
+      {children}
+    </MotionLink>
   )
 }
 
