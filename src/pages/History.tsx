@@ -5,6 +5,8 @@ import { getHistory } from '@/api/quizApi'
 import { useQuiz } from '@/context/QuizContext'
 import type { HistoryEntry } from '@/types/quiz'
 import Reveal from '@/components/Reveal'
+import TrendChart from '@/components/TrendChart'
+import { CategoryBreakdown, DifficultyBreakdown } from '@/components/Breakdowns'
 
 export default function History() {
   const { history: sessionHistory } = useQuiz()
@@ -48,6 +50,19 @@ export default function History() {
             <SummaryCard label="Accuracy" value={totalQuestions > 0 ? `${Math.round((totalCorrect / totalQuestions) * 100)}%` : '—'} />
           </div>
         </Reveal>
+
+        {/* Analytics visualizations */}
+        {allHistory.length > 0 && (
+          <Reveal delay={0.15}>
+            <div className="mb-12 space-y-4">
+              <TrendChart history={allHistory} />
+              <div className="grid md:grid-cols-2 gap-4">
+                <CategoryBreakdown history={allHistory} />
+                <DifficultyBreakdown history={allHistory} />
+              </div>
+            </div>
+          </Reveal>
+        )}
 
         {/* History entries */}
         {reversed.length === 0 ? (

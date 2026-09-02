@@ -38,7 +38,7 @@ export default function About() {
           <div className="glass-strong rounded-3xl p-8 mt-12">
             <h2 className="font-display text-2xl font-600 text-ink-100 mb-6">Credits</h2>
             <div className="space-y-4">
-              <CreditRow label="Design & Development" value="Mayank" />
+              <CreditRow label="Design & Development" value="Mayank Sarwal" />
               <CreditRow label="Project Type" value="Personal Portfolio Project" />
               <CreditRow label="Frontend" value="React, Three.js, Framer Motion, Tailwind CSS" />
               <CreditRow label="Backend" value="Python (Flask integration planned)" />

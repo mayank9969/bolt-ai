@@ -1,7 +1,22 @@
 import { useRef, useMemo } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { Float, MeshDistortMaterial, Icosahedron, RoundedBox } from '@react-three/drei'
 import * as THREE from 'three'
+
+function CameraParallax() {
+  const { camera, pointer } = useThree()
+  const target = useRef(new THREE.Vector3(0, 0, 5))
+
+  useFrame(() => {
+    target.current.x = pointer.x * 0.6
+    target.current.y = pointer.y * 0.4
+    camera.position.x += (target.current.x - camera.position.x) * 0.04
+    camera.position.y += (target.current.y - camera.position.y) * 0.04
+    camera.lookAt(0, 0, 0)
+  })
+
+  return null
+}
 
 function FloatingCard({ position, rotation, color, scale = 1 }: { position: [number, number, number]; rotation: [number, number, number]; color: string; scale?: number }) {
   const ref = useRef<THREE.Group>(null)
@@ -184,6 +199,8 @@ export default function Scene3D({ variant = 'hero' }: Scene3DProps) {
       <directionalLight position={[5, 5, 5]} intensity={0.8} />
       <pointLight position={[-5, -3, 2]} intensity={0.5} color="#2cc4f5" />
       <pointLight position={[5, 3, -2]} intensity={0.3} color="#f5d061" />
+
+      <CameraParallax />
 
       <CoreSphere />
 
